@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyledField } from '../styles/StyledField';
-import { connect } from 'react-redux';
 
 const Field = ({ id, value, permission, row, column, rollCounter, najavljeno, handleInput, handleMouseOver, handleMouseOut }) => (
     <StyledField
@@ -33,8 +32,4 @@ Field.propTypes = {
     handleMouseOut: PropTypes.func
 };
 
-// const mapDispatchToProps = {
-//     handleInput
-// };
-
-export default connect(null)(Field);
+export default Field;

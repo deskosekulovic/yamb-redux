@@ -7,6 +7,7 @@ import { dynamicColumns } from '../utilities/Fields';
 import Checkbox from './Checkbox';
 import { getData } from '../actions';
 import { connect } from 'react-redux';
+import { saveSettings } from '../utilities/store';
 import { setExtraColumns } from '../utilities/Functions';
 
 class Settings extends Component {
@@ -15,9 +16,8 @@ class Settings extends Component {
         this.saveSettings = this.saveSettings.bind(this);
     }
     saveSettings(){
-        const { columnsToAdd } = this.props;
-        // const { numberOfDice, columnsToAdd, getData } = this.props;
-        // getData('SAVE_SETTINGS',{numberOfDice, columnsToAdd});
+        const { numberOfDice, columnsToAdd } = this.props;
+        saveSettings(numberOfDice, columnsToAdd);
         setExtraColumns(columnsToAdd);
     }
     render(){
