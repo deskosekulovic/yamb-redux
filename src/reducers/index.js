@@ -3,8 +3,8 @@ import gameSettings from './gameSettings';
 import game from './game';
 
 const rootReducer = combineReducers({
-    gameSettings,
-    game
+  gameSettings,
+  game
 });
 
 export default rootReducer;

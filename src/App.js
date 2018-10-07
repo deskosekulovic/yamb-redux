@@ -11,74 +11,79 @@ import { connect } from 'react-redux';
 import { setData, handleChange } from './actions';
 
 class App extends Component {
-    constructor(props){
-        super(props);
-        this.handleChange=this.handleChange.bind(this);
-    }
-    componentDidMount(){
-        setExtraColumns(this.props.columnsToAdd);
-    }
-    handleChange(e){
-        this.props.onChange(e);
-    }
-    render() {
-        const { numberOfDice, columnsToAdd } = this.props;
-        let bonusLength = 0;
-        Object.keys(columnsToAdd).map(item=>{
-            columnsToAdd[item] && bonusLength++;
-        });
-        const numberOfFields = (columns.length+bonusLength)*rowsToSelect.length;
-        return (
-            <ThemeProvider theme={theme}>
-                <Switch>
-                    <Route
-                        exact path="/"
-                        render={props=>
-                            <Main
-                                {...props}
-                                columnsToAdd={columnsToAdd}
-                                numberOfColumns={columns.length+bonusLength}
-                                numberOfDice={numberOfDice}
-                                numberOfFields={numberOfFields}
-                            />}
-                    />
-                    <Route
-                        path="/settings"
-                        render={props=>
-                            <Settings
-                                {...props}
-                                columnsToAdd={columnsToAdd}
-                                numberOfDice={numberOfDice}
-                                handleChange={this.handleChange}
-                            />}
-                    />
-                    <Route
-                        path="/toplists"
-                        render={props=>
-                            <TopList
-                                {...props}
-                                numberOfColumns={columns.length+bonusLength}
-                                columnsToAdd={columnsToAdd}
-                                numberOfDice={numberOfDice}
-                            />}
-                    />
-                </Switch>
-            </ThemeProvider>
-        );
-    }
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  componentDidMount() {
+    setExtraColumns(this.props.columnsToAdd);
+  }
+  handleChange(e) {
+    this.props.onChange(e);
+  }
+  render() {
+    const { numberOfDice, columnsToAdd } = this.props;
+    let bonusLength = 0;
+    Object.keys(columnsToAdd).map(item => {
+      columnsToAdd[item] && bonusLength++;
+    });
+    const numberOfFields = (columns.length - 1 + bonusLength) * rowsToSelect.length;
+    return (
+      <ThemeProvider theme={theme}>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={props => (
+              <Main
+                {...props}
+                columns={columns}
+                columnsToAdd={columnsToAdd}
+                numberOfColumns={columns.length - 1 + bonusLength}
+                numberOfDice={numberOfDice}
+                numberOfFields={numberOfFields}
+              />
+            )}
+          />
+          <Route
+            path="/settings"
+            render={props => (
+              <Settings
+                {...props}
+                columnsToAdd={columnsToAdd}
+                numberOfDice={numberOfDice}
+                handleChange={this.handleChange}
+              />
+            )}
+          />
+          <Route
+            path="/toplists"
+            render={props => (
+              <TopList
+                {...props}
+                numberOfColumns={columns.length - 1 + bonusLength}
+                columnsToAdd={columnsToAdd}
+                numberOfDice={numberOfDice}
+              />
+            )}
+          />
+        </Switch>
+      </ThemeProvider>
+    );
+  }
 }
 
-const mapStateToProps = (state) => {
-    const { numberOfDice, columnsToAdd } = state.gameSettings;
-    return {
-        numberOfDice,
-        columnsToAdd
-    };
+const mapStateToProps = state => {
+  const { numberOfDice, columnsToAdd } = state.gameSettings;
+  return {
+    numberOfDice,
+    columnsToAdd
+  };
 };
 
 const mapDispatchToProps = {
-    setData,
-    onChange: handleChange
+  setData,
+  onChange: handleChange
 };
 
 injectGlobal`
@@ -91,4 +96,9 @@ injectGlobal`
   }
 `;
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);

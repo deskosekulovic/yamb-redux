@@ -1,6 +1,6 @@
 {
-  "name": "Hacker News App",
-  "short_name": "HN App",
+  "name": "Yamb",
+  "short_name": "Yamb",
   "start_url": ".",
   "display": "standalone",
   "orientation": "portrait",
