@@ -1,12 +1,21 @@
-// import { store } from '../store/configureStore';
 import calculate, {
   permissionHandler,
   columnResult,
   selectedDice
 } from '../utilities/Functions';
+import {
+  SET_DATA,
+  ROLL_DICE,
+  HANDLE_NAJAVA,
+  HANDLE_INPUT,
+  SELECTED_DICE,
+  HANDLE_MOUSEOVER,
+  HANDLE_MOUSEOUT,
+  RESET_GAME
+} from './types';
 
-export const setData = (type, name, value) => ({
-  type: 'SET_DATA',
+export const setData = (name, value) => ({
+  type: SET_DATA,
   data: {
     name,
     value
@@ -22,7 +31,7 @@ export const handleChange = e => dispatch => {
   const target = e.target;
   const value = target.type === 'checkbox' ? target.checked : target.value;
   const name = target.name;
-  dispatch(setData('SET_DATA', name, value));
+  dispatch(setData(name, value));
 };
 
 export const rollDice = (
@@ -44,7 +53,7 @@ export const rollDice = (
     for (let i = 0; i < numberOfDice; i++) {
       diceValue[i] = selected[i] ? dice[i] : Math.floor(Math.random() * 6 + 1);
     }
-    dispatch(getData('ROLL_DICE', diceValue));
+    dispatch(getData(ROLL_DICE, diceValue));
   }
   if (
     numberOfFields - inputCount == najavaAndRucno &&
@@ -82,13 +91,13 @@ export const handleInput = (
 
   column === 'najava' &&
     rollCounter === 1 &&
-    dispatch(getData('HANDLE_NAJAVA', e.target.id));
+    dispatch(getData(HANDLE_NAJAVA, e.target.id));
 
   ((column === 'najava' &&
     ((rollCounter === 1 && field === 'kenta' && input) || rollCounter !== 1)) ||
     column !== 'najava') &&
     dispatch(
-      getData('HANDLE_INPUT', {
+      getData(HANDLE_INPUT, {
         field: { [e.target.id]: input },
         selected: selectedDice(numberOfDice),
         res
@@ -98,27 +107,26 @@ export const handleInput = (
 
 export const toggleSelectDice = e => dispatch => {
   const index = e.target.name.split('-')[1] - 1;
-  dispatch(getData('SELECTED_DICE', index));
+  dispatch(getData(SELECTED_DICE, index));
 };
 
 export const handleMouseOver = (e, dice, rollCounter) => dispatch => {
   const field = e.target.id.split('-')[1];
   const input = calculate(field, dice, rollCounter);
 
-  dispatch(getData('HANDLE_MOUSEOVER', { field: { [e.target.id]: input } }));
+  dispatch(getData(HANDLE_MOUSEOVER, { field: { [e.target.id]: input } }));
 };
 
 export const handleMouseOut = e => dispatch => {
-  dispatch(getData('HANDLE_MOUSEOUT', e.target.id));
+  dispatch(getData(HANDLE_MOUSEOUT, e.target.id));
 };
 
 export const resetGame = numberOfDice => dispatch => {
-  // const { numberOfDice } = store.getState().gameSettings;
-  dispatch(getData('RESET_GAME', selectedDice(numberOfDice)));
+  dispatch(getData(RESET_GAME, selectedDice(numberOfDice)));
   permissionHandler(null, null, null, true);
   columnResult(null, null, true);
 };
 
 export const toggleTopListSettings = () => dispatch => {
-  dispatch(setData('SET_DATA', 'showTopListSettings', null));
+  dispatch(setData('showTopListSettings', null));
 };

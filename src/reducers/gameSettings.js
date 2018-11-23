@@ -1,5 +1,6 @@
 import { getDataSettings } from '../utilities/store';
 
+// this should be in /store/configureStore.js
 let dataSettings = getDataSettings('dataSettings');
 let topListSettings = getDataSettings('topListSettings');
 

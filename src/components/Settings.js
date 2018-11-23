@@ -5,8 +5,6 @@ import { StyledSettings, Container } from '../styles/StyledSettings';
 import Button from '../styles/Button';
 import { dynamicColumns } from '../utilities/Fields';
 import Checkbox from './Checkbox';
-import { getData } from '../actions';
-import { connect } from 'react-redux';
 import { saveSettings } from '../utilities/store';
 import { setExtraColumns } from '../utilities/Functions';
 
@@ -65,11 +63,4 @@ Settings.propTypes = {
   getData: PropTypes.func
 };
 
-const mapDispatchToProps = {
-  getData
-};
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(Settings);
+export default Settings;

@@ -1,0 +1,9 @@
+export const SET_DATA = 'SET_DATA';
+export const ROLL_DICE = 'ROLL_DICE';
+export const HANDLE_NAJAVA = 'HANDLE_NAJAVA';
+export const HANDLE_INPUT = 'HANDLE_INPUT';
+export const SELECTED_DICE = 'SELECTED_DICE';
+export const HANDLE_MOUSEOVER = 'HANDLE_MOUSEOVER';
+export const HANDLE_MOUSEOUT = 'HANDLE_MOUSEOUT';
+export const RESET_GAME = 'RESET_GAME';
+export const PERMISSION = 'PERMISSION';

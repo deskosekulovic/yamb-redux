@@ -17,6 +17,7 @@ import {
   rollDice,
   handleInput
 } from '../actions';
+import { PERMISSION } from '../actions/types';
 
 class Main extends Component {
   constructor(props) {
@@ -28,14 +29,13 @@ class Main extends Component {
   }
   componentDidMount() {
     this.props.onResetGame(this.props.numberOfDice);
-    window.scrollTo(0, 0);
   }
   componentDidUpdate(prevProps) {
     const {
       rollCounter,
       najavljeno,
       columnsToAdd,
-      getData ,
+      getData,
       inputCount,
       numberOfFields,
       numberOfDice,
@@ -54,7 +54,7 @@ class Main extends Component {
           this.najavaAndRucno++;
       });
       if (!najavljeno) {
-        getData('PERMISSION', per);
+        getData(PERMISSION, per);
       }
     }
     if (inputCount === numberOfFields) {
