@@ -1,3 +1,14 @@
+import {
+  PERMISSION,
+  ROLL_DICE,
+  HANDLE_NAJAVA,
+  HANDLE_INPUT,
+  SELECTED_DICE,
+  HANDLE_MOUSEOVER,
+  HANDLE_MOUSEOUT,
+  RESET_GAME
+} from '../actions/types';
+
 const initState = {
   dice: [],
   selected: [],
@@ -10,20 +21,20 @@ const initState = {
 
 const game = (state = initState, action) => {
   switch (action.type) {
-  case 'ROLL_DICE':
+  case ROLL_DICE:
     return {
       ...state,
       dice: action.data,
       rollCounter: state.rollCounter + 1
     };
-  case 'SELECTED_DICE':
+  case SELECTED_DICE:
     return {
       ...state,
       selected: state.selected.map((el, i) => {
         return i === action.data ? !el : el;
       })
     };
-  case 'RESET_GAME':
+  case RESET_GAME:
     return {
       ...state,
       dice: [],
@@ -34,7 +45,7 @@ const game = (state = initState, action) => {
       najavljeno: false,
       inputCount: 0
     };
-  case 'HANDLE_INPUT':
+  case HANDLE_INPUT:
     return {
       ...state,
       fields: {
@@ -51,15 +62,15 @@ const game = (state = initState, action) => {
       inputCount: state.inputCount + 1,
       najavljeno: false
     };
-  case 'PERMISSION':
+  case PERMISSION:
     return { ...state, permission: action.data };
-  case 'HANDLE_NAJAVA':
+  case HANDLE_NAJAVA:
     return {
       ...state,
       permission: { [action.data]: true },
       najavljeno: !state.najavljeno
     };
-  case 'HANDLE_MOUSEOVER':
+  case HANDLE_MOUSEOVER:
     return {
       ...state,
       fields: {
@@ -69,7 +80,7 @@ const game = (state = initState, action) => {
         )[0]
       }
     };
-  case 'HANDLE_MOUSEOUT':
+  case HANDLE_MOUSEOUT:
     return {
       ...state,
       fields: { ...state.fields, [action.data]: '' }

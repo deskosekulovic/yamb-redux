@@ -28,7 +28,9 @@ class TopList extends Component {
       showTopListSettings,
       toggleTopListSettings
     } = this.props;
-    const data = getDataSettings(localNumberOfDice)[localNumberOfColumns];
+    const data =
+      getDataSettings(localNumberOfDice) &&
+      getDataSettings(localNumberOfDice)[localNumberOfColumns];
     return (
       <StyledTopList>
         <TopListSettings

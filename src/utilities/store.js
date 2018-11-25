@@ -34,5 +34,5 @@ export const saveTopListSettings = (name, value) => {
 
 export const getDataSettings = type => {
   let data = JSON.parse(localStorage.getItem('data')) || {};
-  return data[type] || {};
+  return data[type] || undefined;
 };
